@@ -3,7 +3,7 @@
  * @href: https://github.com/type-challenges/type-challenges/blob/main/questions/02070-medium-drop-char/README.md
  * @Author: mario.ma
  * @Date: 2022-09-05 10:12:12
- * @tag: ['template-literal', '#infer']
+ * @tag: ['template-literal', 'infer']
  */
 
 // Drop a specified char from a string.
