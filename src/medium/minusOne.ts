@@ -3,7 +3,7 @@
  * @href: https://github.com/type-challenges/type-challenges/blob/main/questions/02257-medium-minusone/README.md
  * @Author: mario.ma
  * @Date: 2022-09-05 12:56:50
- * @tags: ["math"]
+ * @tags: ["math", "need-review"]
  */
 
 // Given a number (always positive) as a type. Your type should return the number decreased by one.
