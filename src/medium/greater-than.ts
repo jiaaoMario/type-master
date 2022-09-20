@@ -3,7 +3,7 @@
  * @href: https://github.com/type-challenges/type-challenges/blob/main/questions/04425-medium-greater-than/README.md
  * @Author: mario.ma
  * @Date: 2022-09-20 00:22:46
- * @tags: ['array']
+ * @tags: ['array', 'need-review']
  */
 
 // In This Challenge, You should implement a type GreaterThan<T, U> like T > U
