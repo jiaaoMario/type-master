@@ -21,7 +21,8 @@ type Unique<T extends any[], Result extends any[] = []> = T extends [infer R, ..
                                                                                         : Unique<K, [...Result, R]>
                                                                 : Result;
 
-                                                                /* _____________ Test Cases _____________ */
+
+/* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
 
 type cases = [
