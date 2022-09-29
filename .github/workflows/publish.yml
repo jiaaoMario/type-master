@@ -1,0 +1,22 @@
+name: Update README
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  Prepare-Environment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: pull Main branch newest code
+        uses: actions/checkout@main
+      - name: use Nodejs 16x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.16.0
+          cache: "yarn"
+          cache-dependency-path: ./yarn.lock
+      - name: Download dependencies
+        run: yarn install
+      - name: Generate newest README
+        run: yarn run generate-readme

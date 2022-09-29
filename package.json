@@ -3,12 +3,15 @@
   "version": "1.0.0",
   "description": "This is a repository for TypeScript training, The topic is from type-challenges.",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "generate-readme": "node ./build/generate"
   },
   "keywords": [],
   "author": "jiaao.mario@gmail.com",
   "license": "ISC",
   "devDependencies": {
     "@type-challenges/utils": "^0.1.1"
+  },
+  "dependencies": {
+    "mdast-util-from-markdown": "^1.2.0"
   }
 }
