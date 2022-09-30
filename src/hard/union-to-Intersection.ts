@@ -3,7 +3,7 @@
  * @href: https://github.com/type-challenges/type-challenges/blob/main/questions/00055-hard-union-to-intersection/README.md
  * @Author: mario.ma
  * @Date: 2022-10-01 02:35:18
- * @tags: ['utils', 'infer']
+ * @tags: ['utils', 'infer', 'review']
  */
 
 // Implement the advanced util type UnionToIntersection<U>
@@ -16,7 +16,7 @@ type ToFunc<T> = T extends any
 
 type UnionToIntersection<U> = ToFunc<U> extends (args: infer Arg) => void
                                             ? Arg
-                                            : never
+                                            : never;
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
