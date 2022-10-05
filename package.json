@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "description": "This is a repository for TypeScript training, The topic is from type-challenges.",
   "scripts": {
-    "generate-readme": "node ./build/generate"
+    "generate-readme": "node ./build.js"
   },
   "keywords": [],
   "author": "jiaao.mario@gmail.com",
   "license": "ISC",
   "devDependencies": {
-    "@type-challenges/utils": "^0.1.1"
+    "@type-challenges/utils": "^0.1.1",
+    "esbuild": "^0.15.10"
   },
   "dependencies": {
     "mdast-util-from-markdown": "^1.2.0"
