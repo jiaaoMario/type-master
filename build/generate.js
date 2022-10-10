@@ -20,14 +20,15 @@ function getCategory() {
   const category = [];
   fs.readdir(targetDir, (err, files) => {
     for (const file of files) {
+      fs.stat
       fs.stat(file, (err, f) => {
         console.log(f)
-        if (f.isDirectory) {
-          console.log(f.ino);
+        if (f.isDirectory()) {
           category.push(f.ino);
         }
       });
     }
+    console.log(category);
   });
 }
 

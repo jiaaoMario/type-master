@@ -29,12 +29,12 @@ function getCategory() {
     for (const file of files) {
       import_fs.default.stat(file, (err2, f) => {
         console.log(f);
-        if (f.isDirectory) {
-          console.log(f.ino);
+        if (f.isDirectory()) {
           category.push(f.ino);
         }
       });
     }
+    console.log(category);
   });
 }
 getCategory();
