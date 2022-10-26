@@ -15,25 +15,22 @@ type En = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' 
 
 type Trans<T extends string, S extends string = '', Cache extends unknown[] = []> = T extends `${infer R}${infer U}`
                                                                                         ? Trans<U, R, [...Cache, unknown]>
-                                                                                        : `${Cache['length']}${S}`;
+                                                                                        : `${Cache['length'] extends 1 ? '' : Cache['length']}${S}`;
 
-type isSame<S extends string, R extends string> = R extends `${infer J}${infer _U}` 
+type isSame<S extends string, R extends string> = R extends '' ? true : R extends `${infer J}${infer _U}` 
                                                     ? J extends S ? true : false
                                                     : R extends S ? true : false
 namespace RLE {
   export type Encode<S extends string, Pre extends string = '', Result extends string = ''> = S extends `${infer R}${infer U}${infer K}`
-                                                                                                ? R extends U 
-                                                                                                    ? RLE.Encode<K, `${R}${U}`, Result>
-                                                                                                    : isSame<R, Pre> extends true 
-                                                                                                                        ? RLE.Encode<`${U}${K}`, R, `${Result}${Trans<`${Pre}${R}`>}`>
-                                                                                                                        : RLE.Encode<`${U}${K}`, R, `${Result}${R}`>
-                                                                                                : isSame<S, Pre> extends true 
-                                                                                                                    ? `${Result}${Trans<`${Pre}${S}`>}`
-                                                                                                                    : `${Result}${S}`
+                                                                                                ? Pre extends '' 
+                                                                                                        ? RLE.Encode<`${U}${K}`, R, Result>
+                                                                                                        : isSame<R, Pre> extends true
+                                                                                                                    ? RLE.Encode<`${U}${K}`, `${Pre}${R}`, Result>
+                                                                                                                    : RLE.Encode<`${U}${K}`, R, `${Result}${Trans<Pre>}`>
+                                                                                                : isSame<S, Pre> extends true ? `${Result}${Trans<`${Pre}${S}`>}`
+                                                                                                                                  : `${Result}${Trans<`${Pre}`>}${S}` 
   export type Decode<S extends string> = any
 }
-
-type A = RLE.Encode<'AAABCCXXXXXXY'>
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
