@@ -13,6 +13,14 @@
 type En = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N'
           | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'L' | 'M' | 'N';
 
+type Num = '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '0';
+
+type TransToArr<N extends Num, Result extends unknown[] = []> = `${Result['length']}` extends N ? Result : TransToArr<N, [...Result, unknown]>;
+
+type Repeat<N extends unknown[], S extends string, Result extends string = ''> = N extends [infer _R, ...infer U]
+                                                                                    ? Repeat<U, S, `${Result}${S}`>
+                                                                                    : Result
+
 type Trans<T extends string, S extends string = '', Cache extends unknown[] = []> = T extends `${infer R}${infer U}`
                                                                                         ? Trans<U, R, [...Cache, unknown]>
                                                                                         : `${Cache['length'] extends 1 ? '' : Cache['length']}${S}`;
@@ -29,7 +37,15 @@ namespace RLE {
                                                                                                                     : RLE.Encode<`${U}${K}`, R, `${Result}${Trans<Pre>}`>
                                                                                                 : isSame<S, Pre> extends true ? `${Result}${Trans<`${Pre}${S}`>}`
                                                                                                                                   : `${Result}${Trans<`${Pre}`>}${S}` 
-  export type Decode<S extends string> = any
+  export type Decode<S extends string, PreNum extends Num | '' = '', Result extends string = ''> = S extends `${infer R}${infer K}`
+                                                                                                    ? R extends Num
+                                                                                                        ? Decode<K, R, Result>
+                                                                                                        : PreNum extends ''
+                                                                                                                    ? Decode<K, '', `${Result}${R}`>
+                                                                                                                    : PreNum extends Num
+                                                                                                                                ? Decode<K, '', `${Result}${Repeat<TransToArr<PreNum>, R>}`>
+                                                                                                                                : never
+                                                                                                    : Result
 }
 
 /* _____________ Test Cases _____________ */
@@ -40,5 +56,5 @@ type cases = [
   Expect<Equal<RLE.Encode<'AAABCCXXXXXXY'>, '3AB2C6XY'>>,
 
   // Encoded string -> decoded string
-  Expect<Equal<RLE.Decode<'3AB2C6XY'>, 'AAABCCXXXXXXY'>>,
+  Expect<Equal<RLE.Decode<'3AB2C6XY7Z'>, 'AAABCCXXXXXXYZZZZZZZ'>>,
 ]
