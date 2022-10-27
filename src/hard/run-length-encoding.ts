@@ -10,9 +10,6 @@
 
 /* _____________ Your Code Here _____________ */
 
-type En = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N'
-          | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'L' | 'M' | 'N';
-
 type Num = '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '0';
 
 type TransToArr<N extends Num, Result extends unknown[] = []> = `${Result['length']}` extends N ? Result : TransToArr<N, [...Result, unknown]>;
