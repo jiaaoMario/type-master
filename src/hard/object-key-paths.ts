@@ -10,16 +10,17 @@
 
 /* _____________ Your Code Here _____________ */
 
-type GenNode<K extends string | number,IsRoot extends boolean> = IsRoot extends true? `${K}`: `.${K}` | (K extends number? `[${K}]` | `.[${K}]`:never)
+type GenNode<K extends string | number,Root extends boolean> = Root extends true 
+                                                                        ? `${K}`
+                                                                        : `.${K}` | (K extends number 
+                                                                                        ? `[${K}]` | `.[${K}]` 
+                                                                                        : never);
 
 type ObjectKeyPaths<
   T extends object,
-  IsRoot extends boolean = true,
+  Root extends boolean = true,
   K extends keyof T = keyof T
-> = 
-K extends string | number ?
-  GenNode<K,IsRoot> | (T[K] extends object? `${GenNode<K,IsRoot>}${ObjectKeyPaths<T[K],false>}`:never)
-  :never;
+> = K extends string | number ? GenNode<K, Root> | (T[K] extends object ? `${GenNode<K, Root>}${ObjectKeyPaths<T[K], false>}` : never) : never;
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect, ExpectExtends } from '@type-challenges/utils'
