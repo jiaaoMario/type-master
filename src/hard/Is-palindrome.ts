@@ -15,7 +15,7 @@ type FirstOfStr<T extends string | number> = T extends `${infer R}${infer _U}` ?
 type EndOfStr<T extends string | number> = T extends `${infer _R}${infer M}${infer L}` 
                                                 ? L extends '' ? M : EndOfStr<`${M}${L}`> : never;
 
-type GetStrLen<T extends string, Result extends unknown[] = []> = T extends `${infer R}${infer U}` ? GetStrLen<U, [...Result, unknown]> : Result['length'];
+type GetStrLen<T extends string, Result extends unknown[] = []> = T extends `${infer _R}${infer U}` ? GetStrLen<U, [...Result, unknown]> : Result['length'];
 
 type RemoveEndOfStr<T extends string, Result extends string = ''> = GetStrLen<T> extends 1 ? Result : T extends `${infer R}${infer U}` ? RemoveEndOfStr<U, `${Result}${R}`> : never;
 
